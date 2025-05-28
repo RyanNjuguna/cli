@@ -7,4 +7,4 @@ class MealPlan(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     week = Column(Integer, nullable=False)
-    meals = Column(String)  # Could be a JSON string or comma-separated
+    meals = Column(String, nullable=False)  
