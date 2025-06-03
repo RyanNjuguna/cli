@@ -3,9 +3,9 @@ from app.models.goals import Goal
 from app.models.user import User
 from app.db import SessionLocal
 
-app = typer.Typer()
+goals_app = typer.Typer()
 
-@app.command()
+@goals_app.command()
 def set(user: str, daily: int, weekly: int):
     """Set daily and weekly calorie goals for a user"""
     db = SessionLocal()
@@ -16,7 +16,7 @@ def set(user: str, daily: int, weekly: int):
 
     goal = db.query(Goal).filter(Goal.user_id == user_obj.id).first()
     if not goal:
-        goal = Goal(user_id=user_obj.id, daily_calories=daily, weekly_calories=weekly)
+        goal = Goal(user_id=user_obj.id, daily=daily, weekly=weekly)
         db.add(goal)
     else:
         goal.daily_calories = daily
@@ -25,7 +25,7 @@ def set(user: str, daily: int, weekly: int):
     typer.echo(f"Set goals for {user}: daily={daily}, weekly={weekly}")
     db.close()
 
-@app.command()
+@goals_app.command("list")
 def list(user: str):
     """List goals for a user"""
     db = SessionLocal()
@@ -35,7 +35,7 @@ def list(user: str):
         raise typer.Exit(code=1)
     goal = db.query(Goal).filter(Goal.user_id == user_obj.id).first()
     if goal:
-        typer.echo(f"Goals for {user}: daily={goal.daily_calories}, weekly={goal.weekly_calories}")
+        typer.echo(f"Goals for {user}: daily={goal.daily}, weekly={goal.weekly}")
     else:
         typer.echo(f"No goals set for {user}")
     db.close()

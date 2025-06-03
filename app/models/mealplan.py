@@ -14,5 +14,5 @@ class MealPlan(Base):
     
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
+    user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship("User", back_populates="meal_plans")

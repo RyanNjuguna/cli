@@ -4,14 +4,15 @@ from app.models.user import User
 
 user_app = typer.Typer()
 
-@user_app.command("create")
-def create_user(name: str):
-    session = SessionLocal()
+@user_app.command()
+def add(name: str):
+    """Add a new user"""
+    db = SessionLocal()
     user = User(name=name)
-    session.add(user)
-    session.commit()
-    session.close()
-    typer.echo(f"User '{name}' created!")
+    db.add(user)
+    db.commit()
+    typer.echo(f"User '{name}' created.")
+    db.close()
 
 @user_app.command("list")
 def list_users():
