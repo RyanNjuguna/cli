@@ -1,22 +1,30 @@
-[project]
-name = "health-simplified"
-version = "0.1.0"
-description = "Health Simplified CLI Application"
-authors = [
-    { name = "Your Name", email = "you@example.com" }
-]
-readme = "README.md"
-requires-python = ">=3.8"
-dependencies = [
-    "typer[all]>=0.7.0",
-    "sqlalchemy>=1.4",
-    "pytest>=7.0"  # for testing
-]
-
-[project.scripts]
-# This exposes the CLI as a console command 'myapp'
-myapp = "app.cli:main"
-
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "health_simplified"
+version = "0.1.0"
+description = "Health Simplified CLI Application"
+authors = [
+  { name = "Your Name", email = "your.email@example.com" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+dependencies = [
+  "typer",
+  "sqlalchemy",
+  "pytest"
+]
+
+[project.scripts]
+myapp = "app.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["app", "commands"]
