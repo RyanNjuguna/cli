@@ -6,5 +6,5 @@ class Goal(Base):
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    daily = Column(Integer)
-    weekly = Column(Integer)
+    daily = Column(Integer, nullable=False)
+    weekly = Column(Integer, nullable=False)
